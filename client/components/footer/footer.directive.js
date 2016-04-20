@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('pollzyApp')
+angular.module('pollsyApp')
   .directive('footer', function() {
     return {
       templateUrl: 'components/footer/footer.html',

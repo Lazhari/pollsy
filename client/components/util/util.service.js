@@ -59,7 +59,7 @@ function UtilService($window) {
   return Util;
 }
 
-angular.module('pollzyApp.util')
+angular.module('pollsyApp.util')
   .factory('Util', UtilService);
 
 })();

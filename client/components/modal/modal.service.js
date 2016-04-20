@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('pollzyApp')
+angular.module('pollsyApp')
   .factory('Modal', function($rootScope, $modal) {
     /**
      * Opens a modal

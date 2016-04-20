@@ -17,5 +17,5 @@ class NavbarController {
   }
 }
 
-angular.module('pollzyApp')
+angular.module('pollsyApp')
   .controller('NavbarController', NavbarController);

@@ -3,7 +3,7 @@
 /**
  * Removes server error when user updates input
  */
-angular.module('pollzyApp')
+angular.module('pollsyApp')
   .directive('mongooseError', function() {
     return {
       restrict: 'A',

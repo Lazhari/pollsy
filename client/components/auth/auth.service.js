@@ -183,7 +183,7 @@ function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
   return Auth;
 }
 
-angular.module('pollzyApp.auth')
+angular.module('pollsyApp.auth')
   .factory('Auth', AuthService);
 
 })();

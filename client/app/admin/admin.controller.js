@@ -14,7 +14,7 @@ class AdminController {
   }
 }
 
-angular.module('pollzyApp.admin')
+angular.module('pollsyApp.admin')
   .controller('AdminController', AdminController);
 
 })();

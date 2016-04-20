@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('pollzyApp')
+angular.module('pollsyApp')
   .directive('navbar', () => ({
     templateUrl: 'components/navbar/navbar.html',
     restrict: 'E',

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('pollzyApp.admin')
+angular.module('pollsyApp.admin')
   .config(function($stateProvider) {
     $stateProvider
       .state('admin', {

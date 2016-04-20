@@ -30,7 +30,7 @@ class MainController {
   }
 }
 
-angular.module('pollzyApp')
+angular.module('pollsyApp')
   .controller('MainController', MainController);
 
 })();

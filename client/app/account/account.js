@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('pollzyApp')
+angular.module('pollsyApp')
   .config(function($stateProvider) {
     $stateProvider
       .state('login', {

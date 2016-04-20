@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('pollzyApp')
+angular.module('pollsyApp')
   .directive('oauthButtons', function() {
     return {
       templateUrl: 'components/oauth-buttons/oauth-buttons.html',

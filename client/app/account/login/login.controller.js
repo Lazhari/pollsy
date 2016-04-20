@@ -29,5 +29,5 @@ class LoginController {
   }
 }
 
-angular.module('pollzyApp')
+angular.module('pollsyApp')
   .controller('LoginController', LoginController);

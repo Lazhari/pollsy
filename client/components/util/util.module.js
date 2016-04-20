@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('pollzyApp.util', []);
+angular.module('pollsyApp.util', []);

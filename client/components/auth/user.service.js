@@ -21,7 +21,7 @@ function UserResource($resource) {
   });
 }
 
-angular.module('pollzyApp.auth')
+angular.module('pollsyApp.auth')
   .factory('User', UserResource);
 
 })();

@@ -6,7 +6,7 @@ module.exports = {
 
   // MongoDB connection options
   mongo: {
-    uri: 'mongodb://localhost/pollzy-dev'
+    uri: 'mongodb://localhost/pollsy-dev'
   },
 
   // Seed database on startup

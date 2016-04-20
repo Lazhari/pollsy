@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('pollzyApp', [
-  'pollzyApp.auth',
-  'pollzyApp.admin',
-  'pollzyApp.constants',
+angular.module('pollsyApp', [
+  'pollsyApp.auth',
+  'pollsyApp.admin',
+  'pollsyApp.constants',
   'ngCookies',
   'ngResource',
   'ngSanitize',

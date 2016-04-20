@@ -5,7 +5,7 @@
 module.exports = {
   // MongoDB connection options
   mongo: {
-    uri: 'mongodb://localhost/pollzy-test'
+    uri: 'mongodb://localhost/pollsy-test'
   },
   sequelize: {
     uri: 'sqlite://',

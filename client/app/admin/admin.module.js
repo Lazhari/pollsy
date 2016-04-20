@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('pollzyApp.admin', [
-  'pollzyApp.auth',
+angular.module('pollsyApp.admin', [
+  'pollsyApp.auth',
   'ui.router'
 ]);

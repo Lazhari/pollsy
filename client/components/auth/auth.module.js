@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('pollzyApp.auth', [
-  'pollzyApp.constants',
-  'pollzyApp.util',
+angular.module('pollsyApp.auth', [
+  'pollsyApp.constants',
+  'pollsyApp.util',
   'ngCookies',
   'ui.router'
 ])

@@ -26,7 +26,7 @@ function authInterceptor($rootScope, $q, $cookies, $injector, Util) {
   };
 }
 
-angular.module('pollzyApp.auth')
+angular.module('pollsyApp.auth')
   .factory('authInterceptor', authInterceptor);
 
 })();

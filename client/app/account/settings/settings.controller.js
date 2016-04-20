@@ -25,5 +25,5 @@ class SettingsController {
   }
 }
 
-angular.module('pollzyApp')
+angular.module('pollsyApp')
   .controller('SettingsController', SettingsController);

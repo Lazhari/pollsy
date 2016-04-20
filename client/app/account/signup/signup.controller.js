@@ -39,5 +39,5 @@ class SignupController {
   }
 }
 
-angular.module('pollzyApp')
+angular.module('pollsyApp')
   .controller('SignupController', SignupController);
