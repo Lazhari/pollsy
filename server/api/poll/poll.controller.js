@@ -11,6 +11,8 @@
 
 import _ from 'lodash';
 import Poll from './poll.model';
+import ev from 'express-validation';
+import uniqId from 'uniq-id';
 
 function respondWithResult(res, statusCode) {
     statusCode = statusCode || 200;
@@ -59,7 +61,7 @@ function handleEntityNotFound(res) {
 function handleError(res, statusCode) {
     statusCode = statusCode || 500;
     return function(err) {
-        res.status(200).send({
+        return res.status(200).json({
             ok: false,
             message: err.message,
             status: statusCode,
@@ -93,6 +95,21 @@ export function show(req, res) {
         .then(handleEntityNotFound(res))
         .then(respondWithResult(res))
         .catch(handleError(res));
+}
+
+export function validateChoices(req, res, next) {
+    let poll = req.body;
+    poll.owner = req.user._id;
+    poll.token = uniqId.generateUUID('xxxx', 16)().toUpperCase();
+    if(!poll.choices || !poll.choices.length) {
+        return res.status(200).send({ok: false, message: 'invalid choices!'});
+    } else {
+        if(poll.choices.length < 2) return res.send({ok:false, meesage: 'Please you should 2 choices'});
+        poll.choices.forEach((choice, index) => {
+            if(!choice.title) return res.send({ok: false, message: `Choice ${index} is invalid`});
+        })
+        next();
+    }
 }
 
 // Creates a new Poll in the DB
