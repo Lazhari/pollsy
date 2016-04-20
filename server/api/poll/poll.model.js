@@ -9,9 +9,7 @@ var PollSchema = new mongoose.Schema({
     type: String,
     enum: ['single', 'multiple', 'satisfaction']
   },
-  choices: [
-
-  ],
+  choices: [],
   active: Boolean,
   created: {
     type: Date,
