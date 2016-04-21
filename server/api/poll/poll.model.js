@@ -11,10 +11,15 @@ var PollSchema = new mongoose.Schema({
     },
     choices: [{
         title: String,
-        image: String
+        image: String,
+        answers: [{
+            user: {type: mongoose.Schema.ObjectId, ref: 'User'},
+            date: Date,
+            ip: String,
+        }]
     }],
     active: Boolean,
-    owner: {
+    publisher: {
         type: mongoose.Schema.ObjectId,
         ref: 'User'
     },
