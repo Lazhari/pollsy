@@ -9,6 +9,10 @@ var PollSchema = new mongoose.Schema({
         type: String,
         enum: ['single', 'multiple', 'satisfaction']
     },
+    limitAnswers: {
+        type: Number,
+        default: 0
+    },
     choices: [{
         title: String,
         image: String,
