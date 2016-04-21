@@ -12,6 +12,7 @@ var PollSchema = new mongoose.Schema({
     choices: [{
         title: String,
         image: String,
+        help: String,
         answers: [{
             user: {type: mongoose.Schema.ObjectId, ref: 'User'},
             date: Date,
