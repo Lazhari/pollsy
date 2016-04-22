@@ -14,7 +14,10 @@ const PollSchema = new Schema({
         type: Boolean,
         default: false
     },
-    publisher:{type: Schema.Types.ObjectId, ref: 'User'},
+    publisher: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     expiredDate: Date,
     startDate: {
         type: Date,
@@ -29,7 +32,10 @@ const PollSchema = new Schema({
         description: String,
         image: String,
         answers: [{
-            user: {type: Schema.Types.ObjectId, ref: 'User'},
+            user: {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
+            },
             created: Date,
             ip: String,
             location: []
@@ -49,4 +55,4 @@ const PollSchema = new Schema({
     }
 });
 
-module.exports = mongoose.module(PollSchema, 'Poll');
+module.exports = mongoose.model('Poll', PollSchema);
