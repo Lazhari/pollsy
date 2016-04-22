@@ -34,9 +34,10 @@ var UserSchema = new Schema({
     location: {
         country: String,
         city: String,
+        geo: []
     },
     phone: String,
-    avatarPictureUrl: String,
+    image: String,
     deleted: {
         type: Boolean,
         default: false
@@ -48,7 +49,7 @@ var UserSchema = new Schema({
     created: {
         type: Date,
         default: Date.now
-    },
+    }
 });
 
 /**
