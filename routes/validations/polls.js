@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 const Joi = require('joi');
 exports.create = {
     options: {
@@ -6,7 +6,6 @@ exports.create = {
     },
     body: {
         title: Joi.string().required(),
-        description: Joi.string().required(),
         type: Joi.string().required()
     }
 };

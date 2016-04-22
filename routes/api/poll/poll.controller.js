@@ -1,6 +1,6 @@
 'use strict';
-const Poll = require('../../../models/poll.js');
 const PollQueries = require('./lib/polls-queries');
+const PollValidator = require('./lib/poll-validator');
 /**
  * @api {get} /api/polls/ Get all polls
  * @apiVersion 0.1.0
@@ -44,9 +44,22 @@ exports.get = (req, res, next) => {
             });
         });
 };
-
+/**
+ * @api {post} /api/polls/ Create new poll
+ * @apiVersion 0.1.0
+ * @apiPermission admin, owner
+ * @apiName CreateNewPoll
+ * @apiGroup Poll
+ */
 exports.create = (req, res, next) => {
+    PollValidator.validatePoll(req.body).then((poll) => {
 
+    }).catch((err) => {
+        res.send({
+            ok: false,
+            message: err.message
+        });
+    });
 };
 /**
  * @api {delete} /api/polls/:id Delete poll by ID
