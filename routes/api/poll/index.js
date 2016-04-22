@@ -9,7 +9,7 @@ const auth = require('../../core/auth/auth.service.js');
 router
     .get('/', auth.isAuthenticated(), controller.getAll)
     .get('/:id', controller.get)
-    .post('/', validate(pollValidation.create), controller.create)
-    .put('/:id', validate(pollValidation.update),controller.update)
-    .delete('/:id', controller.delete);
+    .post('/', auth.isAuthenticated(), validate(pollValidation.create), controller.create)
+    .put('/:id', auth.isAuthenticated(), validate(pollValidation.update), controller.update)
+    .delete('/:id', auth.isAuthenticated(), controller.delete);
 module.exports = router;
