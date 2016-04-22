@@ -3,7 +3,9 @@ const Poll = require('../../../models/poll.js');
 const PollQueries = require('./lib/polls-queries');
 
 exports.getAll = (req, res, next) => {
-    PollQueries.getPolls({user: req.user})
+    PollQueries.getPolls({
+            user: req.user
+        })
         .then(polls => {
             return res.send(polls);
         })
@@ -16,29 +18,17 @@ exports.getAll = (req, res, next) => {
 };
 
 exports.get = (req, res, next) => {
-    Poll.findOne({
-            _id: req.params.id,
-            deleted: {
-                $ne: true
-            }
+    PollQueries.getPoll({
+            pollId: req.params.id
         })
-        .select('-deleted')
-        .exec((err, poll) => {
-            if (err) {
-                return res.send({
-                    ok: false,
-                    message: 'Coudn\'t get the poll'
-                });
-            }
-
-            if (!poll) {
-                return res.send({
-                    ok: false,
-                    message: 'Coudn\'t get the poll'
-                });
-            }
-
+        .then(poll => {
             return res.send(poll);
+        })
+        .catch(err => {
+            return res.send({
+                ok: false,
+                message: 'Coudn\'t get the poll'
+            });
         });
 };
 

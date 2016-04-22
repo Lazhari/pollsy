@@ -1,11 +1,10 @@
 'use strict';
-
 const Poll = require('../../../../models/poll');
 
 let PollQueries = (function() {
 
     let _getAllPolls = (options, cb) => {
-        cb = cb || function(){};
+        cb = cb || function() {};
         let query = {
             deleted: {
                 $ne: true
@@ -20,7 +19,7 @@ let PollQueries = (function() {
             Poll.find(query)
                 .select('-deleted -choices.answers')
                 .exec((err, polls) => {
-                    if(err) {
+                    if (err) {
                         reject(err);
                         return cb(err);
                     }
@@ -29,9 +28,37 @@ let PollQueries = (function() {
                 });
         });
     };
+    let _getSinglePoll = (options, cb) => {
+        cb = cb || function() {};
+        let query = {
+            _id: options.pollId,
+            deleted: {
+                $ne: true
+            }
+        };
+        return new Promise((resolve, reject) => {
+            Poll.findOne(query)
+                .select('-deleted -choices.answers')
+                .exec((err, poll) => {
+                    if (err) {
+                        reject(err);
+                        return cb(err);
+                    }
+                    if (poll) {
+                        resolve(poll);
+                        return cb(null, poll);
+                    } else {
+                        var error = new Error('Coudn\'t get the poll');
+                        reject(error);
+                        return cb(error);
+                    }
+                });
+        });
+    };
 
     return {
-        getPolls : _getAllPolls
+        getPoll: _getSinglePoll,
+        getPolls: _getAllPolls
     };
 })();
 
