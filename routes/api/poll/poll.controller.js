@@ -48,7 +48,14 @@ exports.get = (req, res, next) => {
 exports.create = (req, res, next) => {
 
 };
-
+/**
+ * @api {delete} /api/polls/:id Delete poll by ID
+ * @apiVersion 0.1.0
+ * @apiPermission admin, owner
+ * @apiName DeletePollById
+ * @apiGroup Poll
+ * @apiParam {ObjectId} id The poll id.
+ */
 exports.delete = (req, res, next) => {
     PollQueries.deletePoll({
             pollId: req.params.id,
