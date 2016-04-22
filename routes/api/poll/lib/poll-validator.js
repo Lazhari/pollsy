@@ -15,17 +15,27 @@ let PollValidator = (function() {
     };
 
     let _validatePoll = (options, cb) => {
-        let pollBody = options.body;
+        let poll = options.body;
         return new Promise((resolve, reject) => {
-            _validatePoll({
-                choices: pollBody.choices
-            }).then((choices) => {
-                resolve(pollBody);
-                return cb(null, pollBody);
-            }).catch((err) => {
-                reject(err);
-                return cb(err);
-            });
+            if (poll.type !== 'single' && poll.type !== 'multiple') {
+                reject(new Error('Unsupporeted poll type'));
+                return cb(new Error('Unsupporeted poll type'));
+            }
+            if (!poll.choices || poll.choices.length < 2) {
+                reject(new Error('Choices should be more than one'));
+                return cb(new Error('Choices should be more than one'));
+            }
+            _validatePollChoices({
+                    choices: poll.choices
+                })
+                .then((choices) => {
+                    resolve(poll);
+                    return cb(null, poll);
+                })
+                .catch((err) => {
+                    reject(err);
+                    return cb(err);
+                });
         });
     };
     return {
