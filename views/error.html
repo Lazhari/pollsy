@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h3 class="text-center">
+                    <span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign"></span>
+                    Oops:
+                    <small>{{message}}
+                        -
+                        <b>{{error.status}}
+                            error</b>
+                    </small>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>
+                            {{error.stack}}
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <a type="button" class="btn btn-default btn-lg btn-danger" href="/">
+                            <span class="glyphicon glyphicon-home"></span>
+                            No place like a home
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+{% endblock %}
