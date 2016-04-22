@@ -1,7 +1,13 @@
 'use strict';
 const Poll = require('../../../models/poll.js');
 const PollQueries = require('./lib/polls-queries');
-
+/**
+ * @api {get} /api/polls/ Get all polls
+ * @apiVersion 0.1.0
+ * @apiPermission admin, owner, guest
+ * @apiName GetPolls
+ * @apiGroup Poll
+ */
 exports.getAll = (req, res, next) => {
     PollQueries.getPolls({
             user: req.user
@@ -16,7 +22,14 @@ exports.getAll = (req, res, next) => {
             });
         });
 };
-
+/**
+ * @api {get} /api/polls/:id Get poll by ID
+ * @apiVersion 0.1.0
+ * @apiPermission admin, owner, guest
+ * @apiName GetPollById
+ * @apiGroup Poll
+ * @apiParam {ObjectId} id The poll id.
+ */
 exports.get = (req, res, next) => {
     PollQueries.getPoll({
             pollId: req.params.id
