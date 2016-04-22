@@ -13,43 +13,49 @@ var poll = {
 
 describe('Poll validator module', function() {
 
-    it('should throw an error', function(done) {
-        PollValidator.validatePoll({body: poll})
-        .then((poll) => {
-            should.equal(null);
-        })
-        .catch((err) => {
-            should.exist(err);
-            done();
-        });
+    it('should throw an error', function() {
+        return PollValidator.validatePoll({
+            body: poll
+        }).should.be.rejected();
     });
 
-    it('should throw Error title', function(done) {
+    it('should throw Error title', function() {
         poll.choices.push({
             image: ''
         });
-        PollValidator.validatePoll({body: poll})
-        .then((poll) => {
-            should.equal(null);
-        })
-        .catch((err) => {
-            should.exist(err);
-            done();
-        });
+        return PollValidator.validatePoll({
+            body: poll
+        }).should.be.rejected();
     });
-    it('should throw Error for one choice', function(done) {
+    it('should throw Error for one choice', function() {
         poll.choices.push({
             title: 'test',
             image: ''
         });
-        PollValidator.validatePoll({body: poll})
-        .then((poll) => {
-            should.equal(null);
-        })
-        .catch((err) => {
-            let error = new Error('Title on choices should have a title');
-            should.equl(error);
-            done();
+        return PollValidator.validatePoll({
+            body: poll
+        }).should.be.rejected();
+    });
+    it('should return Poll Object', function() {
+        poll.choices=[{title: 'test 1'}, {title: 'test2'}];
+        return PollValidator.validatePoll({
+            body: poll
+        }).should.finally.be.exactly(poll);
+    });
+
+    it('should throw an error if type is not supported', function() {
+        poll.type = 'test';
+        return PollValidator.validatePoll({
+            body: poll
+        }).should.be.rejected();
+    });
+
+    it('should throw an error if choice title is empty string', function() {
+        poll.choices.push({
+            image: ''
         });
+        return PollValidator.validatePoll({
+            body: poll
+        }).should.be.rejected();
     });
 });
