@@ -1,25 +1,20 @@
 'use strict';
 const Poll = require('../../../models/poll.js');
+const PollQueries = require('./lib/polls-queries');
+
 exports.getAll = (req, res, next) => {
-    Poll.find({
-        deleted: {
-            $ne: true
-        }
-        ,$or: [{
-            publisher: req.user._id
-        }, {
-            public: true
-        }]
-    }, (err, polls) => {
-        if (err) {
+    PollQueries.getPolls({user: req.user})
+        .then(polls => {
+            return res.send(polls);
+        })
+        .catch(err => {
             return res.send({
                 ok: false,
                 message: 'Coudn\'t get polls'
             });
-        }
-        return res.send(polls);
-    });
+        });
 };
+
 exports.get = (req, res, next) => {
     Poll.findOne({
             _id: req.params.id,
