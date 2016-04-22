@@ -9,3 +9,13 @@ exports.create = {
         type: Joi.string().required()
     }
 };
+
+exports.update = {
+    options: {
+        flatten: true
+    },
+    body: {
+        title: Joi.string().required(),
+        type: Joi.string().required()
+    }
+};

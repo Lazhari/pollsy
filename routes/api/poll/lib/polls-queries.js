@@ -82,9 +82,30 @@ let PollQueries = (function() {
         });
     };
 
+    let _updatePoll = (options, cb) => {
+        cb = cb || function() {};
+        let conditions = {
+            publisher: options.user._id,
+            _id: options.pollId
+        };
+        let doc = options.poll;
+        return new Promise((resolve, reject) => {
+          Poll.update(conditions, doc)
+              .exec((err, raw) => {
+                  if (err) {
+                      reject(err);
+                      return cb(err);
+                  }
+                  resolve(raw);
+                  return cb(null, raw);
+              });
+        });
+    };
+
     return {
         getPolls: _getAllPolls,
         getPoll: _getPoll,
+        updatePoll: _updatePoll,
         deletePoll: _deletePoll
     };
 })();

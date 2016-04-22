@@ -105,7 +105,43 @@ exports.delete = (req, res, next) => {
             });
         });
 };
-
+/**
+ * @api {put} /api/polls/:id Update exisiting poll
+ * @apiVersion 0.1.0
+ * @apiPermission admin, owner
+ * @apiName UpdatePolls
+ * @apiGroup Poll
+ */
 exports.update = (req, res, next) => {
+    PollValidator.validatePoll({
+            body: req.body
+        })
+        .then((parsedPoll) => {
+            PollQueries.updatePoll({
+                    pollId: req.params.id,
+                    user: req.user,
+                    poll: {
+                        $set: req.body
+                    }
+                })
+                .then((poll) => {
+                    return res.send({
+                        ok: true,
+                        data: poll
+                    });
+                })
+                .catch((err) => {
+                    return res.send({
+                        ok: false,
+                        message: "Couldn\'t update the poll"
+                    });
+                });
+        })
+        .catch((err) => {
+            return res.send({
+                ok: false,
+                message: err.message
+            });
+        });
 
 };
