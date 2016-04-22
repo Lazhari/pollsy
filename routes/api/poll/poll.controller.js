@@ -1,4 +1,5 @@
 'use strict';
+const Poll = require('../../../models/poll');
 const PollQueries = require('./lib/polls-queries');
 const PollValidator = require('./lib/poll-validator');
 /**
@@ -52,14 +53,30 @@ exports.get = (req, res, next) => {
  * @apiGroup Poll
  */
 exports.create = (req, res, next) => {
-    PollValidator.validatePoll(req.body).then((poll) => {
-
-    }).catch((err) => {
-        res.send({
-            ok: false,
-            message: err.message
+    PollValidator.validatePoll(req.body)
+        .then((parsedPoll) => {
+            let poll = new Poll(parsedPoll);
+            poll.save((err, savedPoll) => {
+                if (err) {
+                    return res.send({
+                        ok: false,
+                        message: "Failed saving the poll"
+                    });
+                }
+                delete savedPoll.deleted;
+                delete savedPoll.choices.answers;
+                return res.send({
+                    ok: true,
+                    data: savedPoll
+                });
+            });
+        })
+        .catch((err) => {
+            res.send({
+                ok: false,
+                message: err.message
+            });
         });
-    });
 };
 /**
  * @api {delete} /api/polls/:id Delete poll by ID
