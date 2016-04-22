@@ -53,8 +53,11 @@ exports.get = (req, res, next) => {
  * @apiGroup Poll
  */
 exports.create = (req, res, next) => {
-    PollValidator.validatePoll({body: req.body})
+    PollValidator.validatePoll({
+            body: req.body
+        })
         .then((parsedPoll) => {
+            parsedPoll.publisher = req.user._id;
             let poll = new Poll(parsedPoll);
             poll.save((err, savedPoll) => {
                 if (err) {
