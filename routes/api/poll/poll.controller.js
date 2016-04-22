@@ -53,7 +53,7 @@ exports.get = (req, res, next) => {
  * @apiGroup Poll
  */
 exports.create = (req, res, next) => {
-    PollValidator.validatePoll(req.body)
+    PollValidator.validatePoll({body: req.body})
         .then((parsedPoll) => {
             let poll = new Poll(parsedPoll);
             poll.save((err, savedPoll) => {
