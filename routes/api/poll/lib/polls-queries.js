@@ -28,7 +28,7 @@ let PollQueries = (function() {
                 });
         });
     };
-    let _getSinglePoll = (options, cb) => {
+    let _getPoll = (options, cb) => {
         cb = cb || function() {};
         let query = {
             _id: options.pollId,
@@ -56,9 +56,36 @@ let PollQueries = (function() {
         });
     };
 
+    let _deletePoll = (options, cb) => {
+        cb = cb || function() {};
+        let conditions = {
+            _id: options.pollId,
+            publisher: options.user._id
+        };
+        let doc = {
+            $set: {
+                updated: new Date(),
+                deleted: true
+            }
+        };
+
+        return new Promise((resolve, reject) => {
+            Poll.update(conditions, doc)
+                .exec((err, raw) => {
+                    if (err) {
+                        reject(err);
+                        return cb(err);
+                    }
+                    resolve(raw);
+                    return cb(null, raw);
+                });
+        });
+    };
+
     return {
-        getPoll: _getSinglePoll,
-        getPolls: _getAllPolls
+        getPolls: _getAllPolls,
+        getPoll: _getPoll,
+        deletePoll: _deletePoll
     };
 })();
 

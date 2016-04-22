@@ -50,25 +50,20 @@ exports.create = (req, res, next) => {
 };
 
 exports.delete = (req, res, next) => {
-    Poll.update({
-        _id: req.params.id,
-        publisher: req.user._id
-    }, {
-        $set: {
-            updated: new Date(),
-            deleted: true
-        }
-    }, (err, raw) => {
-        if (err) {
+    PollQueries.deletePoll({
+            pollId: req.params.id,
+            user: req.user
+        }).then(poll => {
+            return res.send({
+                ok: true
+            });
+        })
+        .catch((err) => {
             return res.send({
                 ok: false,
                 message: 'Coudn\'t delete the poll'
             });
-        }
-        return res.send({
-            ok: true
         });
-    });
 };
 
 exports.update = (req, res, next) => {
