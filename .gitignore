@@ -29,5 +29,6 @@ build/Release
 node_modules
 specs-doc
 public/vendor
-# ignore uploads files 
+# ignore uploads files
 public/uploads/*
+results.txt
